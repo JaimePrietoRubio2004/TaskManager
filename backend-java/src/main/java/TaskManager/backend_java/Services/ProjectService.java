@@ -75,6 +75,16 @@ public class ProjectService {
 				.body(String.format("Modified %s successfully", projectDto.getProjectId()));
 	}
 
+	public ResponseEntity<Object> findProjectId(String projectId) {
+		Projects project = projectRepository.findByProjectId(projectId);
+		if (project == null) {
+			return ResponseEntity.status(HttpStatus.OK).body("The project does not exits");
+		}
+		ProjectsDto dto = new ProjectsDto(project.getProjectId(), project.getName(), project.getDescription(),
+				project.getCreatedOn());
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+	}
+
 	@Transactional
 	public ResponseEntity<Object> deleteProject(String projectId) {
 		if (projectId == null) {

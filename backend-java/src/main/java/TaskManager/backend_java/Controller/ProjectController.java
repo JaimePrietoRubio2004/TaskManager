@@ -39,7 +39,7 @@ public class ProjectController {
 		} catch (InvalidObjectException | MatchException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("There was a error. Please wait a few minutes while we resolve it.");
-			}
+		}
 		return ResponseEntity.status(HttpStatus.OK).body("The project will be created");
 	}
 
@@ -59,11 +59,24 @@ public class ProjectController {
 		}
 	}
 
+	@GetMapping("/{projectId}")
+	public ResponseEntity<Object> findListProject(@PathVariable String projectId) {
+		try {
+			if (projectId == null) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The path ID does not match the body ID");
+			}
+			return projectService.findProjectId(projectId);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("There was a error. Please wait a few minutes while we resolve it.");
+		}
+	}
+
 	@PutMapping("/{projectId}")
 	public ResponseEntity<Object> modifyProject(@PathVariable String projectId,
 			@Valid @RequestBody ProjectsDto projectDto) {
 		try {
-			if (projectId == null || projectDto == null|| !projectId.equals(projectDto.getProjectId())) {
+			if (projectId == null || projectDto == null || !projectId.equals(projectDto.getProjectId())) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The path ID does not match the body ID");
 			}
 			return projectService.updatePoject(projectDto);

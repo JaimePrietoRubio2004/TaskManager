@@ -22,7 +22,7 @@ import jakarta.transaction.Transactional;
 public class TasksService {
 
 	private String[] STATE_VARIABLES = { "TODO", "IN_PROGRESS", "DONE" };
-	private String[] PRIORITY_VARIABLES = { "Low", "Hight" };
+	private String[] PRIORITY_VARIABLES = { "Low", "High" };
 
 	@Autowired
 	private TasksRepository tasksRepository;
