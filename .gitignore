@@ -10,3 +10,15 @@
 
 # NuGet
 *.nupkg
+# IDE metadata
+.idea/
+.metadata/
+.project
+.vs/
+
+# Build output
+out/
+
+# Python
+.venv/
+__pycache__/
